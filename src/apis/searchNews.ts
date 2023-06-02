@@ -1,7 +1,15 @@
 import axios from 'axios';
-import { ISearchNewsApiProps } from 'components/newsSearch/newsSearchType';
 
-export async function searchNewsListAPI({ search, topic, country, sort, page, include }: ISearchNewsApiProps) {
+interface ISearchNewsList {
+  search: string;
+  topic: string;
+  country: string;
+  sort: string;
+  page: number;
+  searchIn: string;
+}
+
+export async function searchNewsListAPI({ search, topic, country, sort, page, searchIn }: ISearchNewsList) {
   const response = await axios.get('/v2/search', {
     params: {
       q: search,
@@ -9,7 +17,7 @@ export async function searchNewsListAPI({ search, topic, country, sort, page, in
       topic: topic,
       countries: country,
       page: page,
-      search_in: include,
+      search_in: searchIn,
     },
   });
   return response.data;

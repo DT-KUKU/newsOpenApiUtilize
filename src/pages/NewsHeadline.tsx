@@ -1,9 +1,9 @@
-import Template from 'components/newsHeadline/Template';
+import NewsHeadLineForm from 'components/newsHeadline/NewsHeadLineForm';
 
 function NewsHeadline() {
   return (
     <div className="w-full h-full">
-      <Template />
+      <NewsHeadLineForm />
     </div>
   );
 }

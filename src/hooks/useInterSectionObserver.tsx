@@ -1,10 +1,37 @@
-import { headLineInfinityScrollAPI } from 'apis/headline';
-import { IHeadLineApi, IInterSectionObserverProps } from 'components/newsHeadline/headLineType';
+import { headLineListAPI } from 'apis/headline';
+import { IHeadLineApi, IHeadLineCard } from 'components/newsHeadline/headLineType';
 import { useEffect, useRef, useState } from 'react';
 
-function useInterSectionObserver({ setHeadLine, topic, country, page, setPage }: IInterSectionObserverProps) {
+interface IInterSectionObserver {
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  setHeadLine: React.Dispatch<React.SetStateAction<IHeadLineCard[]>>;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
+  topic: string;
+  country: string;
+  page: number;
+}
+
+function useInterSectionObserver({ setHeadLine, topic, country, page, setPage, setLoading }: IInterSectionObserver) {
   const target = useRef(null);
   const [hasNextPage, setHasNextPage] = useState(true);
+
+  const getHeadLineListApiHandler = async () => {
+    try {
+      setLoading(true);
+      const headlineResponse: IHeadLineApi = await headLineListAPI({ topic, country, page });
+      setHeadLine((prev) => [...prev, ...headlineResponse.articles]);
+      if (page + 1 === headlineResponse.total_pages) setHasNextPage(false);
+      setPage((prev) => {
+        return prev + 1;
+      });
+    } catch (e: any) {
+      if (e.request.status === 401) {
+        alert('API 사용량이 만료되었습니다.');
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     if (page !== 1) {
@@ -18,18 +45,7 @@ function useInterSectionObserver({ setHeadLine, topic, country, page, setPage }:
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          console.log('ObserverPage', page, hasNextPage);
-          headLineInfinityScrollAPI({ topic, country, page })
-            .then((headline: IHeadLineApi) => {
-              setHeadLine((prev) => [...prev, ...headline.articles]);
-              if (page + 1 === headline.total_pages) setHasNextPage(false);
-              setPage((prev) => {
-                return prev + 1;
-              });
-            })
-            .catch(() => {
-              alert('사용량을 초과하였습니다.');
-            });
+          getHeadLineListApiHandler();
         }
       },
       { threshold: 0 },

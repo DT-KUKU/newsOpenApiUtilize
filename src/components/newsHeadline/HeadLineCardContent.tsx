@@ -1,17 +1,23 @@
-import NewsCardWrapper from 'components/common/NewsCardWrapper';
+import SqureCard from 'components/common/SqureCard';
 import { IHeadLineCard } from './headLineType';
 
-function HeadLineCardContent({ cardInfo }: { cardInfo: IHeadLineCard }) {
+function HeadLineCardContent({ headLineList }: { headLineList: IHeadLineCard[] }) {
   return (
-    <NewsCardWrapper href={cardInfo.link}>
-      <div>
-        <p>{cardInfo.title}</p>
-        <p>{cardInfo.author}</p>
-        <p>{cardInfo.published_date}</p>
-        <img src={cardInfo.media} width={50} height={50} />
-        <p>{cardInfo.rights}</p>
-      </div>
-    </NewsCardWrapper>
+    <section className="grid grid-cols-1 gap-5 mt-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      {headLineList.map((headline, idx) => {
+        return (
+          <SqureCard key={idx} href={headline.link}>
+            <div>
+              <p>{headline.title}</p>
+              <p>{headline.author}</p>
+              <p>{headline.published_date}</p>
+              <img src={headline.media} width={50} height={50} />
+              <p>{headline.rights}</p>
+            </div>
+          </SqureCard>
+        );
+      })}
+    </section>
   );
 }
 

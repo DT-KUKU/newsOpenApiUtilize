@@ -15,9 +15,3 @@ function SelectBox({ value, options, onChange }: ComponentProps<'select'> & { op
 }
 
 export default SelectBox;
-
-// {
-//   options: { value: string | number }[];
-//   onChange: (v: string | number) => void;
-//   defaultValue: string | number;
-// }

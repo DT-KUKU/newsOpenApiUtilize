@@ -1,11 +1,12 @@
 import axios from 'axios';
-import { IInterSectionObserverProps } from 'components/newsHeadline/headLineType';
 
-export async function headLineInfinityScrollAPI({
-  country,
-  topic,
-  page,
-}: Omit<IInterSectionObserverProps, 'setHeadLine' | 'setPage'>) {
+interface IHeadLineList {
+  topic: string;
+  country: string;
+  page: number;
+}
+
+export async function headLineListAPI({ country, topic, page }: IHeadLineList) {
   const response = await axios.get('/v2/latest_headlines', {
     params: {
       countries: country,

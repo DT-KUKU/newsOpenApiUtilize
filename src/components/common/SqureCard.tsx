@@ -1,7 +1,7 @@
 import { ComponentProps } from 'react';
 import { StrictPropsWithChildren } from './commonType';
 
-function NewsCardWrapper({ children, href }: StrictPropsWithChildren<ComponentProps<'a'>>) {
+function SqureCard({ children, href }: StrictPropsWithChildren<ComponentProps<'a'>>) {
   return (
     <a
       href={href}
@@ -13,4 +13,4 @@ function NewsCardWrapper({ children, href }: StrictPropsWithChildren<ComponentPr
   );
 }
 
-export default NewsCardWrapper;
+export default SqureCard;
