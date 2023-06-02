@@ -5,8 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { USERID1, USERID2, USERPW1, USERPW2 } from 'utils/constData';
 import { setLocalStorage } from 'utils/localStorage';
-import LoginButton from './LoginButton';
-import LoginTitle from './LoginTitle';
 
 function LoginForm() {
   const [userId, setUserId] = useInput('');
@@ -35,14 +33,14 @@ function LoginForm() {
     <div className="w-[30rem] border-2 h-[30rem]">
       <form className="flex flex-col items-center h-full justify-evenly" onSubmit={userLoginSubmitHandler}>
         <div>
-          <LoginTitle>뉴스 API</LoginTitle>
+          <p className="text-3xl">뉴스 API</p>
         </div>
         <div className="space-y-4">
-          <LoginInput tagName="ID" value={userId} onChange={setUserId} />
-          <LoginInput tagName="PW" value={userPassword} onChange={setUserPassword} />
+          <LoginInput tagName="ID" value={userId} onChange={setUserId} type="text" />
+          <LoginInput tagName="PW" value={userPassword} onChange={setUserPassword} type="password" />
         </div>
         <div>
-          <LoginButton />
+          <button className="w-40 h-10 text-white bg-black rounded-md flex-cc">로그인</button>
         </div>
       </form>
     </div>

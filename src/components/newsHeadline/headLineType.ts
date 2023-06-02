@@ -35,18 +35,3 @@ export interface IHeadLineCard {
   media: string;
   link: string;
 }
-
-export interface IHeadLineSelectBoxProps {
-  topic: string;
-  countries: string;
-  setTopic: (topic: string) => void;
-  setCountries: (country: string) => void;
-}
-
-export interface IInterSectionObserverProps {
-  setHeadLine: React.Dispatch<React.SetStateAction<IHeadLineCard[]>>;
-  setPage: React.Dispatch<React.SetStateAction<number>>;
-  topic: string;
-  country: string;
-  page: number;
-}

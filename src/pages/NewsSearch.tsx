@@ -1,9 +1,9 @@
-import Template from 'components/newsSearch/Template';
+import SearchListForm from 'components/newsSearch/SearchListForm';
 
 function NewsSearch() {
   return (
     <div className="w-full h-full">
-      <Template />
+      <SearchListForm />
     </div>
   );
 }

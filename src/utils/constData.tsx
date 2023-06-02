@@ -31,7 +31,7 @@ export const NEWS_SORT = [{ value: 'relevancy' }, { value: 'date' }, { value: 'r
 
 export const NEWS_PAGENATION_SIZE = [{ value: 5 }, { value: 10 }, { value: 15 }];
 
-export const NEWS_KEYWORD_INCLUDE = [{ value: 'both' }, { value: 'title' }, { value: 'summary' }];
+export const NEWS_KEYWORD_INCLUDE = [{ value: 'title_summary' }, { value: 'title' }, { value: 'summary' }];
 
 export const DUMMY = [
   {
